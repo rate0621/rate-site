@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block main_containts %}
+{% load static %}
+
+  <main>
+    ここがindex.htmlです。
+  </main>
+
+{% endblock %}

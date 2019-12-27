@@ -1,0 +1,33 @@
+.topbox {
+    position: relative;
+    margin: 2em 0;
+    padding: 0.5em 1em;
+    border: solid 2px #95ccff;
+    border-radius: 6px;
+}
+
+.topbox .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+
+.topbox .title {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+}
+
+.topbox .summary {
+    font-size: 14px;
+    margin: 0;
+}

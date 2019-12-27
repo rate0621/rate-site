@@ -1,0 +1,13 @@
+{% block body_block %}
+ 
+<h1>ダメージ更新</h1>
+ 
+    <form class="" method="post">
+        {% csrf_token %}
+        <table>
+            {{ form }}
+        </table>
+        <button type="submit">save</button>
+    </form>
+ 
+{% endblock %}

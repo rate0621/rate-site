@@ -1,0 +1,15 @@
+table.attack_log {
+    width: 1000px;
+    margin-left:  auto;
+    margin-Right: auto;
+}
+
+body {
+    width: 900px;
+    margin-left:  auto;
+    margin-right: auto;
+}
+
+table {
+    text-align:center;
+}
