@@ -1,100 +1,48 @@
-{% extends 'clanbattle/base.html' %}
-{% block cb_list%}
-<div id="aaa">
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a href="#boss" class="nav-link active" data-toggle="tab">ボス</a>
-  </li>
-  <li class="nav-item">
-    <a href="#attack-log" class="nav-link" data-toggle="tab">凸ログ</a>
-  </li>
-</ul>
+{% extends 'base.html' %}
+{% block content %}
 
-<div class="tab-content" id="myTabContent">
-    <div class="tab-pane show active" id="boss" role="tabpanel" aria-labelledby="boss-tab">
-
-        <ol class="breadcrumb my-4">
-            <li class="breadcrumb-item">ボス情報</li>
-        </ol>
-        <table class="table">
-            <thead class="thead-dark">
+<div class="topbox">
+    <span class="box-title">ボス情報</span>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>名前</th>
+                <th>HP</th>
+                <th>ダメージ目安</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in boss %}
                 <tr>
-                    <th>ID</th>
-                    <th>名前</th>
-                    <th>HP</th>
-                    <th>ダメージ目安</th>
+                    <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.boss_id}}</td>
+                    <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.boss_name}}</td>
+                    <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.max_hit_point}}</td>
+                    <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.target}}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for b in boss %}
-                    <tr>
-                        <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.boss_id}}</td>
-                        <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.boss_name}}</td>
-                        <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.max_hit_point}}</td>
-                        <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.target}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <ol class="breadcrumb my-4">
-            <li class="breadcrumb-item">現在のボス</li>
-        </ol>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>名前</th>
-                    <th>残りHP</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for b in current_boss %}
-                    <tr>
-                        <td><a href="/clanbattle/update_current_boss/{{b.id}}">{{b.boss.boss_name}}</td>
-                        <td><a href="/clanbattle/update_current_boss/{{b.id}}">{{b.hit_point}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    <div class="tab-pane" id="attack-log" role="tabpanel" aria-labelledby="attack-log-tab">
-        <div class="form-group">
-            <label for="select1a">Select:</label>
-            <form method="get">
-                <select name="month" id="select1a" class="form-control" onchange="submit(this.form)">
-                    {% for m in past_month %}
-                        <option value={{ m.0 }}-{{ m.1 }}-01 {{ m.2 | yesno:'selected,' }} }}>{{ m.0 }}/{{ m.1 }}</option>
-                    {% endfor %}
-                </select>
-            </form>
-        </div>
-
-        <ol class="breadcrumb my-4">
-            <li class="breadcrumb-item">Attack Log</li>
-        </ol>
-        <table class="table attack_log">
-            <thead class="thead-dark">
-                <tr>
-                    <th>凸時刻</th>
-                    <th>ユーザ名</th>
-                    <th>ボス名</th>
-                    <th>ダメージ</th>
-                    <th>持ち越し？</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for l in a_log %}
-                    <tr>
-                        <td>{{l.attack_time|date:"Y/m/d f"}}</td>
-                        <td>{{l.member.member_name}}</td>
-                        <td>{{l.boss.boss_name}}</td>
-                        <td><a href="/clanbattle/update_damage/{{l.id}}">{{l.damage}}</td>
-                        <td>{{l.is_carry_over | yesno:'持ち越し, -'}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
+
+<div class="topbox">
+    <span class="box-title">現在のボス</span>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>名前</th>
+                <th>残りHP</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for b in current_boss %}
+                <tr>
+                    <td><a href="/clanbattle/update_current_boss/{{b.id}}">{{b.boss.boss_name}}</td>
+                    <td><a href="/clanbattle/update_current_boss/{{b.id}}">{{b.hit_point}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

@@ -1,3 +1,32 @@
+table.attack_log {
+    width: 1000px;
+    margin-left:  auto;
+    margin-Right: auto;
+}
+
+h1 {
+  margin-top: 0;
+  padding: 10px;
+  font-size: 35px;
+  background-color: #00ced1;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 1px 8px #777;
+  text-shadow: 1px 1px 1px #777;
+}
+
+body {
+    width: 900px;
+    margin-left:  auto;
+    margin-right: auto;
+}
+
+table {
+    margin: 1em 0;
+    text-align:center;
+}
+
+
 .topbox {
     position: relative;
     margin: 2em 0;
