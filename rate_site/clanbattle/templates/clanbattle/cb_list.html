@@ -6,7 +6,6 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>名前</th>
                 <th>HP</th>
                 <th>ダメージ目安</th>
@@ -15,10 +14,9 @@
         <tbody>
             {% for b in boss %}
                 <tr>
-                    <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.boss_id}}</td>
                     <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.boss_name}}</td>
-                    <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.max_hit_point}}</td>
-                    <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.target}}</td>
+                    <td>{{b.max_hit_point}}</td>
+                    <td>{{b.target}}</td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -38,7 +36,7 @@
             {% for b in current_boss %}
                 <tr>
                     <td><a href="/clanbattle/update_current_boss/{{b.id}}">{{b.boss.boss_name}}</td>
-                    <td><a href="/clanbattle/update_current_boss/{{b.id}}">{{b.hit_point}}</td>
+                    <td>{{b.hit_point}}</td>
                 </tr>
             {% endfor %}
         </tbody>

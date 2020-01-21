@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, UpdateView
 
 from clanbattle.models import *
-from clanbattle.forms import BossForm, AttackLogForm
+from clanbattle.forms import BossForm, CurrentBossForm, AttackLogForm
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -66,6 +66,11 @@ class CbListView(TemplateView):
 class BossUpdateView(UpdateView):
     model = Boss
     form_class = BossForm
+    success_url = "/clanbattle"
+
+class CurrentBossUpdateView(UpdateView):
+    model = CurrentBoss
+    form_class = CurrentBossForm
     success_url = "/clanbattle"
 
 class DamageUpdateView(UpdateView):
