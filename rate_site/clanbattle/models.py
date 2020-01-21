@@ -12,7 +12,7 @@ class Boss(models.Model):
     boss_id   = models.IntegerField(primary_key=True, verbose_name='番号', null=False, default='')
     boss_name     = models.CharField(verbose_name='ボス名', max_length=255)
     max_hit_point = models.IntegerField(verbose_name='HP')
-    target        = models.CharField(verbose_name='ダメージ目安', max_length=255)
+    target        = models.CharField(verbose_name='凸数目安', max_length=255)
 
     def __str__(self):
         ret = self.boss_name
