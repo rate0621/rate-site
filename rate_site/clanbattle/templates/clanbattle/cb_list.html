@@ -1,46 +1,92 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
-<div class="topbox">
-    <span class="box-title">ボス情報</span>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>名前</th>
-                <th>HP</th>
-                <th>凸数目安</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for b in boss %}
-                <tr>
-                    <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.boss_name}}</td>
-                    <td>{{b.max_hit_point}}</td>
-                    <td>{{b.target}}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+<script type="text/javascript">
+$(function() {
+  if($.cookie("openTag")){
+   //一旦すべての active を外す
+   $('a[data-toggle="tab"]').parent().removeClass('active');
+   $('a[href="#' + $.cookie("openTag") +'"]').click();
+   //$('a[href=#' + $.cookie("openTag") +']').parent().addClass('active'); 
+  }
+ 
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+   var tabName = e.target.href;
+   var items = tabName.split("#");
+   //クッキーに選択されたタブを記憶
+   $.cookie("openTag",items[1], { expires: 700 });
+  });
+});
+</script>
 
-<div class="topbox">
-    <span class="box-title">現在のボス</span>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>名前</th>
-                <th>残りHP</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for b in current_boss %}
-                <tr>
-                    <td><a href="/clanbattle/update_current_boss/{{b.id}}">{{b.boss.boss_name}}</td>
-                    <td>{{b.hit_point}}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="#boss" data-toggle="tab">ボス</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#attacklog" data-toggle="tab">凸ログ</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane show active" id="boss" role="tabpanel" aria-labelledby="boss-tab">
+        <div class="topbox">
+            <span class="box-title">ボス情報</span>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>名前</th>
+                        <th>HP</th>
+                        <th>凸数目安</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for b in boss %}
+                        <tr>
+                            <td><a href="/clanbattle/update_boss/{{b.boss_id}}">{{b.boss_name}}</td>
+                            <td>{{b.max_hit_point}}</td>
+                            <td>{{b.target}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="topbox">
+            <span class="box-title">現在のボス</span>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>名前</th>
+                        <th>残りHP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for b in current_boss %}
+                        <tr>
+                            <td><a href="/clanbattle/update_current_boss/{{b.id}}">{{b.boss.boss_name}}</td>
+                            <td>{{b.hit_point}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="tab-pane" id="attacklog" role="tabpanel" aria-labelledby="attacklog-tab">
+        <div class="form-group">
+            <label for="select1a">Select:</label>
+            <form method="get">
+                <select name="month" id="select1a" class="form-control" onchange="submit(this.form)">
+                    {% for m in past_month %}
+                        <option value={{ m.0 }}-{{ m.1 }}-01 {{ m.2 | yesno:'selected,' }} }}>{{ m.0 }}/{{ m.1 }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
+    </div>
 </div>
 
 {% endblock %}

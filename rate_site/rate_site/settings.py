@@ -143,3 +143,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+
+if not DEBUG:
+    #SECRET_KEY = os.environ['SECRET_KEY']
+    import django_heroku #追加
+    django_heroku.settings(locals()) #追加
+
